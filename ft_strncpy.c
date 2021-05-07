@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 18:23:17 by tjeong            #+#    #+#             */
-/*   Updated: 2021/05/03 18:40:39 by tjeong           ###   ########.fr       */
+/*   Created: 2021/05/06 20:40:48 by tjeong            #+#    #+#             */
+/*   Updated: 2021/05/07 17:40:20 by tjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_bzero(void *s, size_t n)
-{
-	char	*tmp_ptr;
-	size_t	i;
+#include "libft.h"
 
-	tmp_ptr = (char *)s;
+char	*ft_strncpy(char *dest, char *src, size_t size)
+{
+	size_t i;
+
 	i = 0;
-	while (n--)
+	while (src[i] && i < size)
 	{
-		tmp_ptr[i] = '\0';
+		dest[i] = src[i];
 		i++;
 	}
+	while (i < size)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }

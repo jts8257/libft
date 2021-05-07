@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 16:01:41 by tjeong            #+#    #+#             */
-/*   Updated: 2021/05/03 17:01:10 by tjeong           ###   ########.fr       */
+/*   Created: 2021/05/04 19:01:57 by tjeong            #+#    #+#             */
+/*   Updated: 2021/05/06 17:48:52 by tjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
-	int		sign;
-	int		res;
+	size_t	j;
+	char	*substr;
 
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	sign = 1;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	if (str[i] < '0' || str[i] > '9')
+	if (*s == 0)
 		return (0);
-	res = 0;
-	while (str[i] >= '0' && str[i] <= '9')
+	if (!(substr = (char *)malloc(len * sizeof(char) + 1)))
+		return (0);
+	if (start >= ft_strlen((char *)s))
+		return (ft_strdup(""));
+	i = 0;
+	j = 0;
+	while (s[start + i] && i < len)
 	{
-		res = res * 10 + (str[i] - '0');
+		substr[j] = s[start + i];
 		i++;
+		j++;
 	}
-	return (res * sign);
+	substr[j] = '\0';
+	return (substr);
 }
