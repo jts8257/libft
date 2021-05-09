@@ -6,7 +6,7 @@
 /*   By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 20:23:27 by tjeong            #+#    #+#             */
-/*   Updated: 2021/05/06 20:40:37 by tjeong           ###   ########.fr       */
+/*   Updated: 2021/05/09 15:49:37 by tjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*tmp_ptr;
 	char	*trimed_str;
 
-	if (!*s1 && !*set)
+	if (!s1 || !set)
 		return (NULL);
 	front = 0;
 	back = 0;
@@ -33,7 +33,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 			back--;
 	if (!(trimed_str = (char *)malloc(back * sizeof(char) + 1)))
 		return (NULL);
-	ft_strncpy(trimed_str, tmp_ptr + front, back);
+	ft_strlcpy(trimed_str, tmp_ptr + front, back + 1);
 	trimed_str[back] = '\0';
 	return (trimed_str);
 }

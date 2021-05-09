@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: tjeong <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 20:40:48 by tjeong            #+#    #+#             */
-/*   Updated: 2021/05/07 17:40:20 by tjeong           ###   ########.fr       */
+/*   Created: 2021/05/08 20:13:04 by tjeong            #+#    #+#             */
+/*   Updated: 2021/05/08 20:22:30 by tjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strncpy(char *dest, char *src, size_t size)
+void		ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	size_t i;
+	t_list	*curr;
+	t_list	*next;
 
-	i = 0;
-	while (src[i] && i < size)
+	curr = *lst;
+	while (curr)
 	{
-		dest[i] = src[i];
-		i++;
+		next = curr->next;
+		ft_lstdelone(curr, del);
+		curr = next;
 	}
-	while (i < size)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
+	*lst = NULL;
 }

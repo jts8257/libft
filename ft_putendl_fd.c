@@ -6,7 +6,7 @@
 /*   By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 21:04:26 by tjeong            #+#    #+#             */
-/*   Updated: 2021/05/06 21:22:02 by tjeong           ###   ########.fr       */
+/*   Updated: 2021/05/09 15:48:11 by tjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
 }

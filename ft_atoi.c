@@ -6,7 +6,7 @@
 /*   By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:01:41 by tjeong            #+#    #+#             */
-/*   Updated: 2021/05/07 20:50:44 by tjeong           ###   ########.fr       */
+/*   Updated: 2021/05/09 13:56:59 by tjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int		ft_atoi(const char *str)
 	while (ft_isdigit(str[i]))
 	{
 		res = res * 10 + (sign * (str[i] - '0'));
+		if (judge_return(res) <= 0)
+			return (judge_return(res));
 		i++;
 	}
-	if (judge_return(res) <= 0)
-		res = judge_return(res);
-	return (res);
+	return ((int)res);
 }

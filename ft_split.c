@@ -3,75 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: tjeong <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 13:02:02 by tjeong            #+#    #+#             */
-/*   Updated: 2021/05/07 16:57:12 by tjeong           ###   ########.fr       */
+/*   Created: 2021/05/08 14:40:52 by tjeong            #+#    #+#             */
+/*   Updated: 2021/05/09 16:58:43 by tjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		count_size(char const *s, char c)
+static char		**ft_allfree(char **res)
 {
-	int cnt;
-	int flag;
+	size_t	i;
 
-	flag = 0;
-	cnt = 0;
-	while (*s)
+	i = 0;
+	while (res[i])
 	{
-		if (*s == c && flag == 0)
-		{
-			cnt++;
-			flag = 1;
-		}
-		else if (*s == c)
-			flag = 0;
-		s++;
+		free(res[i]);
+		i++;
 	}
-	return (cnt);
+	free(res);
+	return (NULL);
 }
 
-void	ft_split_fill(char *s, char **res, char c, int size)
+static size_t	getsize(char const *s, char c)
 {
-	int		i;
-	int		j;
-	int		start;
-	int		end;
+	size_t	i;
+	size_t	size;
 
-	i = -1;
-	j = -1;
-	while (s[++i])
+	if (!s[0])
+		return (0);
+	i = 0;
+	size = 0;
+	while (s[i] && s[i] == c)
+		i++;
+	while (s[i])
 	{
-		start = i;
-		end = i;
-		while (s[i++] == c)
-			end++;
-		if (end > start)
+		if (s[i] == c)
 		{
-			if (!(res[++j] = (char *)malloc(end - start + 1)))
-				res[j] = NULL;
-			ft_strncpy(res[j], &s[start], end - start + 1);
+			size++;
+			while (s[i] && s[i] == c)
+				i++;
+			continue ;
 		}
+		i++;
 	}
-	if (j < size - 1)
-	{
-		if (!(res[++j] = (char *)malloc(size - end + 1)))
-			res[j] = NULL;
-		ft_strncpy(res[j], &s[end], size - end + 1);
-	}
+	if (s[i - 1] != c)
+		size++;
+	return (size);
 }
 
-char	**ft_split(char const *s, char c)
+static size_t	ft_getlen(char *str, char c)
 {
-	int		size;
+	size_t i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+static char		**ft_result(char **res, char const *s, size_t size, char c)
+{
+	char	*str;
+	size_t	i;
+	size_t	next_len;
+
+	i = 0;
+	str = (char *)s;
+	next_len = 0;
+	while (i < size)
+	{
+		while (*str == c)
+			str++;
+		next_len = ft_getlen(str, c);
+		if (!(res[i] = (char *)malloc(sizeof(char) * (next_len + 1))))
+			return (ft_allfree(res));
+		ft_strlcpy(res[i], str, next_len + 1);
+		str += next_len;
+		i++;
+	}
+	res[i] = NULL;
+	return (res);
+}
+
+char			**ft_split(char const *s, char c)
+{
 	char	**res;
+	size_t	size;
 
-	size = count_size(s, c);
+	if (!s)
+		return (NULL);
+	size = getsize(s, c);
 	if (!(res = (char **)malloc(sizeof(char *) * (size + 1))))
 		return (NULL);
-	ft_split_fill((char *)s, res, c, size);
-	res[size] = 0;
-	return (res);
+	return (ft_result(res, s, size, c));
 }

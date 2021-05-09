@@ -6,7 +6,7 @@
 /*   By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:18:23 by tjeong            #+#    #+#             */
-/*   Updated: 2021/05/07 20:41:52 by tjeong           ###   ########.fr       */
+/*   Updated: 2021/05/09 15:48:33 by tjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	size_t			len;
 	char			*tmp;
 
+	if (!s || !f)
+		return (NULL);
 	len = ft_strlen((char *)s);
 	tmp = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!tmp)
