@@ -6,7 +6,7 @@
 #    By: tjeong <tjeong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/04 12:36:20 by tjeong            #+#    #+#              #
-#    Updated: 2021/05/09 16:46:23 by tjeong           ###   ########.fr        #
+#    Updated: 2021/05/10 10:40:09 by tjeong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,5 +55,3 @@ re : fclean all
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $?
-
-.PHONY : bonus all clean fclean re
